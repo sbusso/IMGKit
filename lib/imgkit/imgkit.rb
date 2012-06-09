@@ -37,7 +37,10 @@ class IMGKit
     @source = Source.new(url_file_or_html)
     
     @stylesheets = [] 
-    @stylesheets << options[:stylesheets] if options[:stylesheets]
+    if options[:stylesheets]
+      @stylesheets << options[:stylesheets]
+      options.delete(:stylesheets)
+    end
 
     @options = IMGKit.configuration.default_options.merge(options)
     @options.merge! find_options_in_meta(url_file_or_html) unless source.url?
